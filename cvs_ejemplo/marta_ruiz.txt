@@ -1,0 +1,26 @@
+Marta Ruiz
+Machine Learning Engineer · Ciudad de México · marta.ruiz@example.com
+
+PERFIL
+Ingeniera de machine learning con 8 años de experiencia llevando modelos a
+producción. Especializada en NLP y sistemas de recomendación.
+
+EXPERIENCIA
+2019-2025  ML Engineer, Streaming LATAM
+  - Recomendador en producción para 12 M de usuarios (PyTorch + FAISS).
+  - Búsqueda semántica multilingüe con Hugging Face y Qdrant.
+  - Despliegue de modelos en Kubernetes sobre AWS; inferencia por lotes con Spark.
+  - Monitoreo de drift y reentrenamiento automático con Airflow.
+
+2017-2019  Data Scientist, Banco Central
+  - Modelos de riesgo crediticio con scikit-learn y XGBoost.
+
+HABILIDADES
+Python, PyTorch, TensorFlow, scikit-learn, NLP, Hugging Face, RAG, FAISS,
+Spark, Airflow, Kubernetes, AWS, Docker, machine learning.
+
+IDIOMAS
+Español nativo, inglés avanzado (C2), francés intermedio (B2).
+
+EDUCACIÓN
+Maestría en Ciencia de Datos, UNAM (2018).

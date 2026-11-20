@@ -1,0 +1,26 @@
+Sofía Mendoza
+Data Analyst · Buenos Aires, Argentina · sofia.mendoza@example.com
+
+PERFIL
+Analista de datos con 3 años de experiencia en reporting y automatización de
+ETL para equipos comerciales y de producto.
+
+EXPERIENCIA
+2022-2025  Data Analyst, Mercado Sur
+  - 30 tableros en Power BI y Looker Studio para 5 áreas de negocio.
+  - ETL diario con SQL, pandas y Airflow; 12 fuentes distintas.
+  - Análisis de cohortes y churn; detecté una fuga de 8% de ingresos.
+  - Documentación y capacitación a usuarios no técnicos.
+
+2021-2022  Asistente de BI, Consultora Delta
+  - Limpieza de datos en Excel y SQL; informes semanales.
+
+HABILIDADES
+SQL, Excel, Power BI, Looker, pandas, Python, ETL, Airflow, estadística,
+visualización de datos, Git.
+
+IDIOMAS
+Español nativo, inglés intermedio (B2), portugués avanzado.
+
+EDUCACIÓN
+Licenciatura en Economía, Universidad de Buenos Aires (2021).

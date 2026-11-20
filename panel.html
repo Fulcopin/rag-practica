@@ -1,0 +1,232 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Agente de CVs · Panel</title>
+<style>
+  :root { color-scheme: light dark; --bg: rgba(127,127,127,.08); --line: rgba(127,127,127,.28); }
+  * { box-sizing: border-box; }
+  body { font-family: system-ui, "Segoe UI", sans-serif; margin: 0; padding: 24px;
+         max-width: 1080px; margin-inline: auto; line-height: 1.55; }
+  h1 { font-size: 1.6rem; margin: 0 0 4px; }
+  h2 { font-size: 1.05rem; margin: 0 0 10px; text-transform: uppercase; letter-spacing: .06em; opacity: .75; }
+  .sub { opacity: .7; margin: 0 0 18px; font-size: .93rem; }
+  .card { border: 1px solid var(--line); border-radius: 12px; padding: 16px; margin-bottom: 16px; background: var(--bg); }
+  .row { display: flex; gap: 10px; flex-wrap: wrap; align-items: center; }
+  textarea, input[type=number] { font: inherit; padding: 10px 12px; border-radius: 8px;
+        border: 1px solid var(--line); background: transparent; color: inherit; }
+  textarea { width: 100%; min-height: 76px; resize: vertical; }
+  button { font: inherit; padding: 10px 16px; border-radius: 8px; border: 0; cursor: pointer;
+           background: #6b8afd; color: #fff; font-weight: 600; }
+  button.secondary { background: transparent; border: 1px solid var(--line); color: inherit; font-weight: 500; }
+  button.danger { background: #e05252; }
+  button:disabled { opacity: .5; cursor: not-allowed; }
+  .chips { display: flex; flex-wrap: wrap; gap: 6px; }
+  .chip { font-size: .78rem; padding: 2px 8px; border-radius: 999px; border: 1px solid var(--line); }
+  .chip.miss { border-color: #e05252; color: #e05252; }
+  .cand { display: flex; justify-content: space-between; gap: 10px; padding: 7px 0; border-bottom: 1px dashed var(--line); font-size: .92rem; }
+  .cand:last-child { border-bottom: 0; }
+  .muted { opacity: .65; font-size: .85rem; }
+  .res { border: 1px solid var(--line); border-radius: 10px; padding: 14px; margin-bottom: 10px; }
+  .res h3 { margin: 0; font-size: 1rem; display: flex; justify-content: space-between; gap: 8px; }
+  .bar { height: 7px; border-radius: 99px; background: rgba(127,127,127,.25); margin: 8px 0 10px; overflow: hidden; }
+  .bar > i { display: block; height: 100%; background: linear-gradient(90deg, #6b8afd, #46c08a); }
+  .answer { white-space: pre-wrap; font-size: .95rem; }
+  .err { color: #ff6b6b; font-size: .9rem; white-space: pre-wrap; }
+  .status { font-size: .82rem; opacity: .8; }
+  details { margin-top: 12px; }
+  summary { cursor: pointer; font-size: .9rem; opacity: .8; }
+  .spinner { display: inline-block; width: 14px; height: 14px; border: 2px solid rgba(255,255,255,.4);
+             border-top-color: #fff; border-radius: 50%; animation: spin .8s linear infinite; vertical-align: -2px; }
+  @keyframes spin { to { transform: rotate(360deg); } }
+</style>
+</head>
+<body>
+  <h1>Agente de CVs</h1>
+  <p class="sub">Sube CVs, pregunta en lenguaje natural y mira el ranking con evidencia.</p>
+  <p class="status" id="status">Comprobando estado…</p>
+
+  <section class="card">
+    <h2>1 · Candidatos</h2>
+    <div class="row" style="margin-bottom:10px;">
+      <input type="file" id="files" multiple accept=".pdf,.txt">
+      <button id="btnUp">Subir</button>
+      <button id="btnDel" class="secondary danger">Borrar todos</button>
+      <span class="muted" id="upInfo"></span>
+    </div>
+    <div id="lista" class="muted">Cargando…</div>
+  </section>
+
+  <section class="card">
+    <h2>2 · Preguntar</h2>
+    <textarea id="q" placeholder="Ej: Busco un data engineer con Python, Airflow y AWS, mínimo 5 años, inglés avanzado"></textarea>
+    <div class="row" style="margin-top:10px;">
+      <label class="muted">Resultados: <input type="number" id="k" value="3" min="1" max="10" style="width:64px"></label>
+      <button id="btnAgent">Preguntar al agente</button>
+      <button id="btnSearch" class="secondary">Solo ranking (sin LLM)</button>
+    </div>
+    <div id="aviso" class="muted" style="margin-top:8px;"></div>
+  </section>
+
+  <section id="out"></section>
+
+<script>
+const $ = (id) => document.getElementById(id);
+const esc = (s) => String(s ?? "").replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+
+async function api(ruta, opciones = {}) {
+  const r = await fetch(ruta, opciones);
+  const texto = await r.text();
+  let datos;
+  try { datos = JSON.parse(texto); } catch { datos = texto; }
+  if (!r.ok) {
+    const msg = (datos && datos.detail) ? datos.detail : (typeof datos === "string" ? datos : JSON.stringify(datos));
+    throw new Error("HTTP " + r.status + ": " + msg);
+  }
+  return datos;
+}
+
+async function cargarEstado() {
+  try {
+    const s = await api("/salud");
+    $("status").textContent =
+      `Embeddings: ${s.embeddings.backend} (${s.embeddings.modelo.split("/").pop()}) · ` +
+      `LLM: ${s.llm.backend} (${s.llm.modelo}) · Qdrant: ${s.qdrant.modo}`;
+  } catch (e) {
+    $("status").textContent = "No pude leer /salud: " + e.message;
+  }
+}
+
+async function cargarLista() {
+  try {
+    const cvs = await api("/cvs");
+    const nombres = Object.keys(cvs).sort();
+    if (!nombres.length) { $("lista").textContent = "No hay candidatos: sube algún CV."; return; }
+    $("lista").innerHTML = nombres.map(n => {
+      const p = cvs[n];
+      return `<div class="cand">
+        <span><b>${esc(n)}</b></span>
+        <span class="muted">${p.anios ?? "?"} años · ${esc((p.idiomas || []).join(", "))}</span>
+        <span class="chips">${(p.habilidades || []).slice(0, 6).map(h => `<span class="chip">${esc(h)}</span>`).join("")}</span>
+      </div>`;
+    }).join("");
+  } catch (e) {
+    $("lista").innerHTML = `<span class="err">${esc(e.message)}</span>`;
+  }
+}
+
+function pintarRanking(ranking) {
+  if (!ranking || !ranking.length) return "<p class='muted'>Sin resultados.</p>";
+  return ranking.map((c, i) => `
+    <div class="res">
+      <h3><span>${i + 1}. ${esc(c.candidato)}</span><span>${Number(c.score).toFixed(3)}</span></h3>
+      <div class="bar"><i style="width:${Math.max(2, Math.min(100, c.score * 100))}%"></i></div>
+      <div class="chips">
+        ${(c.payload?.habilidades || []).slice(0, 12).map(h => `<span class="chip">${esc(h)}</span>`).join("")}
+      </div>
+      ${(c.faltan && c.faltan.length) ? `<div class="chips" style="margin-top:8px">
+        ${c.faltan.map(h => `<span class="chip miss">falta ${esc(h)}</span>`).join("")}</div>` : ""}
+      <details><summary>Evidencia</summary>
+        <ul>${(c.evidencia || []).map(x => `<li>${esc(x)}</li>`).join("")}</ul>
+      </details>
+    </div>`).join("");
+}
+
+async function subir() {
+  const archivos = $("files").files;
+  if (!archivos.length) { $("upInfo").textContent = "Elige al menos un archivo."; return; }
+  const fd = new FormData();
+  for (const f of archivos) fd.append("archivos", f);
+  $("btnUp").disabled = true;
+  $("upInfo").innerHTML = '<span class="spinner"></span> Subiendo… (unos segundos por CV)';
+  try {
+    const d = await api("/cvs/upload", { method: "POST", body: fd });
+    $("upInfo").textContent = "Listo: " + Object.keys(d).join(", ");
+    await cargarLista();
+  } catch (e) {
+    $("upInfo").innerHTML = `<span class="err">${esc(e.message)}</span>`;
+  } finally {
+    $("btnUp").disabled = false;
+    $("files").value = "";
+  }
+}
+
+async function preguntar(usarLLM) {
+  const pregunta = $("q").value.trim();
+  if (!pregunta) { $("aviso").textContent = "Escribe una pregunta."; return; }
+  const k = Math.max(1, Math.min(10, Number($("k").value) || 3));
+  $("out").innerHTML = "";
+  $("aviso").innerHTML = '<span class="spinner"></span> ' +
+    (usarLLM ? "El agente está pensando (2-10 s)…" : "Filtrando por skills…");
+  $("btnAgent").disabled = $("btnSearch").disabled = true;
+  try {
+    if (usarLLM) {
+      const d = await api("/agent", {
+        method: "POST", headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ pregunta, k })
+      });
+      $("out").innerHTML = `
+        <section class="card">
+          <h2>Payload buscado</h2>
+          <div class="chips">${(d.payload.habilidades || []).map(h => `<span class="chip">${esc(h)}</span>`).join("")}
+            ${d.payload.anios_min ? `<span class="chip">≥ ${esc(d.payload.anios_min)} años</span>` : ""}
+            ${(d.payload.idiomas || []).map(i => `<span class="chip">${esc(i)}</span>`).join("")}
+          </div>
+          <h2 style="margin-top:16px">Ranking</h2>
+          ${pintarRanking(d.ranking)}
+          <h2 style="margin-top:16px">Respuesta del agente</h2>
+          <div class="answer">${esc(d.respuesta)}</div>
+        </section>`;
+    } else {
+      const p = await api("/payload", {
+        method: "POST", headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ pregunta, k })
+      });
+      const r = await api("/search", {
+        method: "POST", headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ payload: p, k })
+      });
+      $("out").innerHTML = `
+        <section class="card">
+          <h2>Ranking por payload (sin LLM)</h2>
+          <div class="chips">${(p.habilidades || []).map(h => `<span class="chip">${esc(h)}</span>`).join("")}
+            ${p.anios_min ? `<span class="chip">≥ ${esc(p.anios_min)} años</span>` : ""}
+            ${(p.idiomas || []).map(i => `<span class="chip">${esc(i)}</span>`).join("")}
+          </div>
+          <div style="margin-top:12px">${pintarRanking(r)}</div>
+        </section>`;
+    }
+    $("aviso").textContent = "";
+  } catch (e) {
+    $("aviso").innerHTML = `<span class="err">${esc(e.message)}</span>`;
+  } finally {
+    $("btnAgent").disabled = $("btnSearch").disabled = false;
+  }
+}
+
+async function borrarTodo() {
+  if (!confirm("¿Borrar TODOS los candidatos de la colección?")) return;
+  $("upInfo").innerHTML = '<span class="spinner"></span> Borrando…';
+  try {
+    await api("/cvs", { method: "DELETE" });
+    $("upInfo").textContent = "Colección borrada.";
+    $("out").innerHTML = "";
+    await cargarLista();
+  } catch (e) {
+    $("upInfo").innerHTML = `<span class="err">${esc(e.message)}</span>`;
+  }
+}
+
+$("btnUp").onclick = subir;
+$("btnDel").onclick = borrarTodo;
+$("btnAgent").onclick = () => preguntar(true);
+$("btnSearch").onclick = () => preguntar(false);
+$("q").addEventListener("keydown", (e) => {
+  if ((e.ctrlKey || e.metaKey) && e.key === "Enter") preguntar(true);
+});
+cargarEstado();
+cargarLista();
+</script>
+</body>
+</html>

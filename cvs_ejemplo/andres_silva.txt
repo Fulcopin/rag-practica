@@ -1,0 +1,21 @@
+Andrés Silva
+Junior Developer · Guayaquil, Ecuador · andres.silva@example.com
+
+PERFIL
+Egresado de Ingeniería en Computación con 1 año de experiencia en prácticas.
+Busco mi primer rol formal como desarrollador backend o de datos.
+
+EXPERIENCIA
+2024-2025  Prácticas de desarrollo, Universidad Estatal
+  - Scripts en Python para limpiar encuestas de 3.000 registros.
+  - Proyecto de fin de carrera: API en Flask con SQLite para reservas.
+  - Uso de Git y GitHub para trabajo en equipo.
+
+HABILIDADES
+Python, Java, Flask, SQL, SQLite, Git, HTML, CSS, Excel.
+
+IDIOMAS
+Español nativo, inglés básico (A2).
+
+EDUCACIÓN
+Ingeniería en Computación, Universidad Estatal (2025).

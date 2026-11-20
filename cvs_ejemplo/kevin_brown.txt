@@ -1,0 +1,26 @@
+Kevin Brown
+Cloud Data Engineer · Austin, TX (remote) · kevin.brown@example.com
+
+SUMMARY
+Cloud data engineer with 6 years of experience building lakehouse platforms on
+Azure and AWS. Focused on reliability, cost and data quality.
+
+EXPERIENCE
+2021-2025  Cloud Data Engineer, Northwind Analytics
+  - Databricks lakehouse on Azure; medallion architecture with Delta Lake.
+  - PySpark jobs processing 2 TB per day; Airflow orchestration.
+  - Terraform for infrastructure as code and CI/CD with GitHub Actions.
+  - Data quality with Great Expectations; 99.9% pipeline uptime.
+
+2019-2021  Data Engineer, Bluebird Software
+  - ETL with Python and SQL Server; migration to Snowflake.
+
+SKILLS
+Python, SQL, PySpark, Spark, Databricks, Delta Lake, Airflow, Azure, AWS,
+Terraform, Docker, Snowflake, Git, ETL, data modeling.
+
+LANGUAGES
+English (native), Spanish (intermediate B1).
+
+EDUCATION
+B.Sc. Computer Science, University of Texas at Austin (2019).

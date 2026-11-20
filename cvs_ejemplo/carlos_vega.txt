@@ -1,0 +1,26 @@
+Carlos Vega
+DevOps / SRE · Santiago, Chile · carlos.vega@example.com
+
+PERFIL
+SRE con 6 años de experiencia en plataformas cloud y automatización.
+Obsesionado con la fiabilidad, la observabilidad y el coste.
+
+EXPERIENCIA
+2020-2025  SRE, Banco Digital Austral
+  - 40 microservicios en Kubernetes (EKS) con Terraform e infraestructura como código.
+  - CI/CD con GitHub Actions y Argo CD; reduje el tiempo de despliegue de 2 h a 12 min.
+  - Observabilidad con Prometheus, Grafana y OpenTelemetry; SLO del 99,95%.
+  - Automatización en Python y Go para tareas operativas.
+
+2018-2020  Administrador de sistemas, Hosting Andino
+  - Linux, Nginx, PostgreSQL y backups automatizados; migración a Azure.
+
+HABILIDADES
+Kubernetes, Docker, Terraform, AWS, Azure, Linux, Python, Go, Git, CI/CD,
+Prometheus, Grafana, PostgreSQL.
+
+IDIOMAS
+Español nativo, inglés avanzado (C1).
+
+EDUCACIÓN
+Ingeniería Civil en Computación, Universidad de Chile (2018).

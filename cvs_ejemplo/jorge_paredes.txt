@@ -1,0 +1,26 @@
+Jorge Paredes
+BI & ETL Lead · Madrid, España · jorge.paredes@example.com
+
+PERFIL
+Líder de BI con 10 años de experiencia en bodegas de datos y gobierno del dato.
+He montado equipos de 6 personas y migrado plataformas completas.
+
+EXPERIENCIA
+2018-2025  BI Lead, Grupo Aéreo Ibérico
+  - Migración de Oracle a Snowflake; 400 tablas y 90 informes.
+  - Orquestación con Airflow y dbt; calidad de dato con tests automáticos.
+  - Equipo de 6 analistas; definición de KPIs y catálogo de datos.
+  - Coste cloud reducido un 28% en AWS.
+
+2015-2018  Consultor BI, Deloitte
+  - ETL con Informatica y SQL Server para banca y seguros.
+
+HABILIDADES
+SQL, Snowflake, Oracle, Informatica, dbt, Airflow, AWS, Power BI, Tableau,
+ETL, modelado dimensional, gobierno del dato, Python.
+
+IDIOMAS
+Español nativo, inglés avanzado (C1), alemán básico.
+
+EDUCACIÓN
+Ingeniería Informática, Universidad Politécnica de Madrid (2015).

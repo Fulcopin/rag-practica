@@ -1,0 +1,26 @@
+Luis Gómez
+Backend Developer · Bogotá, Colombia · luis.gomez@example.com
+
+PERFIL
+Desarrollador backend con 2 años de experiencia en APIs REST y microservicios.
+Enfocado en código limpio, tests y despliegues sencillos.
+
+EXPERIENCIA
+2023-2025  Backend Developer, Logística Express
+  - APIs con FastAPI y PostgreSQL para seguimiento de envíos (200 req/s).
+  - Docker y Docker Compose; despliegue en un VPS con Nginx.
+  - Cache con Redis y colas con Celery para notificaciones.
+  - Tests de integración con pytest y cobertura del 85%.
+
+2022-2023  Practicante de desarrollo, Agencia Digital Nova
+  - Mantenimiento de servicios en Flask y scripts de automatización.
+
+HABILIDADES
+Python, FastAPI, Flask, PostgreSQL, MongoDB, Redis, Docker, Git, SQL,
+Celery, pytest.
+
+IDIOMAS
+Español nativo, inglés intermedio (B1).
+
+EDUCACIÓN
+Ingeniería de Software, Universidad de los Andes (2022).

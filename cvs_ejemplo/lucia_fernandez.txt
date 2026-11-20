@@ -1,0 +1,26 @@
+Lucía Fernández
+Data Scientist Senior · Montevideo, Uruguay · lucia.fernandez@example.com
+
+PERFIL
+Data scientist con 7 años de experiencia en experimentación, causalidad y
+modelos predictivos para producto y marketing.
+
+EXPERIENCIA
+2019-2025  Data Scientist, E-commerce Regional
+  - Diseño y análisis de experimentos A/B (200+ tests); framework de métricas.
+  - Modelos de propensión y churn con scikit-learn y XGBoost en AWS SageMaker.
+  - Segmentación con clustering y análisis causal (DiD, propensity score).
+  - Dashboards en Tableau y comunicación de resultados a dirección.
+
+2017-2019  Analista cuantitativa, Consultora
+  - Encuestas, regresión y reportes en R y Python.
+
+HABILIDADES
+Python, R, SQL, estadística, A/B testing, causalidad, scikit-learn, XGBoost,
+pandas, AWS, SageMaker, Tableau, visualización de datos.
+
+IDIOMAS
+Español nativo, inglés avanzado (C1), italiano básico.
+
+EDUCACIÓN
+Maestría en Estadística, Universidad de la República (2017).

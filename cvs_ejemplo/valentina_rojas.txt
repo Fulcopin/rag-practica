@@ -1,0 +1,26 @@
+Valentina Rojas
+NLP / LLM Engineer · Medellín, Colombia · valentina.rojas@example.com
+
+PERFIL
+Investigadora aplicada en procesamiento de lenguaje natural con 4 años de
+experiencia. Trabajo en RAG, evaluación de LLM y búsqueda semántica.
+
+EXPERIENCIA
+2022-2025  NLP Engineer, Laboratorio de IA Andino
+  - Sistema RAG sobre 200 k documentos con embeddings multilingües y Qdrant.
+  - Evaluación de LLM: métricas de fidelidad, recuperación y latencia.
+  - Fine-tuning de modelos con PyTorch y Hugging Face; destilación para reducir costes.
+  - Búsqueda híbrida (BM25 + vectores) y re-ranking.
+
+2021-2022  Research Assistant, Universidad
+  - Análisis de sentimiento en español; publicación en congreso.
+
+HABILIDADES
+Python, NLP, LLM, RAG, PyTorch, Hugging Face, transformers, FAISS, Qdrant,
+LangChain, embeddings, machine learning, Git.
+
+IDIOMAS
+Español nativo, inglés avanzado (C1), francés básico (A2).
+
+EDUCACIÓN
+Maestría en Inteligencia Artificial, Universidad de Antioquia (2022).

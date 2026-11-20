@@ -1,0 +1,26 @@
+Diego Ramírez
+Fullstack Developer · Quito, Ecuador · diego.ramirez@example.com
+
+PERFIL
+Desarrollador fullstack con 4 años de experiencia en productos SaaS.
+Disfruto del diseño de interfaces y de la calidad del frontend.
+
+EXPERIENCIA
+2021-2025  Fullstack Developer, SaaS Pyme
+  - Frontend en React y TypeScript; diseño con Figma y sistema de componentes.
+  - Backend con Node.js, Express y MongoDB; API REST con 60 endpoints.
+  - Docker y despliegues en DigitalOcean; CI con GitHub Actions.
+  - Mejoras de rendimiento: LCP de 4,1 s a 1,8 s.
+
+2020-2021  Desarrollador junior, Agencia Creativa
+  - Sitios con JavaScript, HTML y CSS; integración de CMS.
+
+HABILIDADES
+JavaScript, TypeScript, React, Node.js, Express, MongoDB, Docker, Git, Figma,
+HTML, CSS, REST.
+
+IDIOMAS
+Español nativo, inglés intermedio (B1).
+
+EDUCACIÓN
+Ingeniería en Sistemas, Escuela Politécnica Nacional (2020).

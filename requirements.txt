@@ -1,0 +1,14 @@
+# Versiones probadas en Python 3.12 y Python 3.14 (Windows x64), con wheel binario.
+fastapi==0.165.0
+uvicorn[standard]==0.54.0
+python-multipart==0.0.34
+numpy==2.5.5
+pypdf==7.1.1
+qdrant-client==1.20.0
+
+# Embeddings locales gratis (ONNX, CPU). Sustituye a la API de Hugging Face.
+fastembed==0.9.1
+
+# Solo si usas el backend "hf" (de pago) o para clientes compatibles con OpenAI
+huggingface_hub==2.4.0
+httpx==0.28.1

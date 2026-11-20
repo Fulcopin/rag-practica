@@ -1,0 +1,27 @@
+Ana Torres
+Data Engineer · Lima, Perú · ana.torres@example.com
+
+PERFIL
+Ingeniera de datos con 5 años de experiencia construyendo pipelines batch y
+streaming en la nube. Me gusta trabajar cerca del negocio y documentar todo.
+
+EXPERIENCIA
+2021-2025  Data Engineer, Retail Andino
+  - Pipelines en Airflow (120 DAGs) sobre AWS: S3, Glue, Athena, Redshift.
+  - Procesamiento con PySpark de 40 GB diarios; reduje el coste un 35%.
+  - Construí un asistente RAG interno con LangChain, Qdrant y embeddings
+    multilingües para buscar en políticas de la empresa.
+  - Docker, GitHub Actions y tests con pytest + Great Expectations.
+
+2019-2021  Analista de datos, FinTech Sur
+  - SQL avanzado, dbt y dashboards en Metabase.
+
+HABILIDADES
+Python, SQL, Airflow, Spark, AWS, Redshift, Docker, Git, dbt, LangChain,
+Qdrant, ETL, pandas.
+
+IDIOMAS
+Español nativo, inglés avanzado (C1), portugués básico.
+
+EDUCACIÓN
+Ingeniería de Sistemas, Universidad Nacional de Ingeniería (2019).
